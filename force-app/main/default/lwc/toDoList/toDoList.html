@@ -1,0 +1,53 @@
+<template>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <lightning-card   title="Task To Do">
+                <lightning-input class="slds-p-around_medium taskNameInput" name="taskName" type="text" value={taskName}
+                                 label="Task Name" placeholder="type here..." required 
+                                 message-when-value-missing="Please Enter Task Name" onchange={handleInput}></lightning-input>
+                <lightning-input class="slds-p-around_medium" name="taskDate" type="date" value={taskdate} 
+                                 label="Task Date" field-level-help="Default value is today's date" onchange={handleInput}></lightning-input>
+                <lightning-button class="slds-p-around_medium" variant="brand" label="Add" onclick={handleTaskSave}></lightning-button>
+                <lightning-button class="slds-p-around_medium" variant="brand" label="Reset"  onclick={handleTaskReset}></lightning-button>
+            </lightning-card>
+        </div>
+        <div class="slds-col">
+             <lightning-card  title="Incomplete Task">
+                 <div class="slds-p-around_medium">
+                 <template for:each={incompleteTaskList} for:item="eachTask" for:index="index">
+                     <div draggable="true" ondragstart={dragHandler} key={eachTask.taskName} data-index={index} class="slds-box slds-theme_shade incompleteBg">
+                        <div class="slds-grid slds-gutters ">
+                            <div class="slds-col slds-size_2-of-3">
+                                <p class="taskName">{eachTask.taskName}</p>
+                                <p>{eachTask.taskDate}</p>
+                            </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                <lightning-button-icon variant="base" data-index={index} class="slds-m-left_xx-small" 
+                                                       icon-name="utility:delete" onclick={deleteIncompleteTask}></lightning-button-icon>
+                                <lightning-button-icon variant="base" data-index={index} class="slds-m-left_xx-small"  
+                                                        icon-name="utility:check" onclick={completeTask}></lightning-button-icon>
+                            </div>
+                        </div>
+                    </div>
+                 </template>
+                 </div>
+            </lightning-card>
+        </div>
+        <div class="slds-col">
+             <lightning-card  title="Completed Task">
+                <div ondragover={allowDrop} ondrop={dropHandler} class="slds-p-around_medium">
+                 <template for:each={completedTaskList} for:item="eachTask" for:index="index">
+                     <div key={eachTask.taskName} class="slds-box slds-theme_shade completeBg">
+                        <div class="slds-grid slds-gutters ">
+                            <div class="slds-col slds-size_2-of-3">
+                                <p class="taskName">{eachTask.taskName}</p>
+                                <p>{eachTask.taskDate}</p>
+                            </div>
+                        </div>
+                    </div>
+                 </template>
+                 </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>
