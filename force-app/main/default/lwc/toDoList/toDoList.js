@@ -109,4 +109,5 @@ export default class ToDoList extends LightningElement {
         let sortedArr = this.sortTasks(this.completedTaskList);
         this.completedTaskList = [...sortedArr];
     }
+    
 }
