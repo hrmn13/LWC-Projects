@@ -1,0 +1,1 @@
+"Welcome to my GitHub repository, where I showcase my journey into the world of Lightning Web Components (LWC) in the Salesforce ecosystem. Inspired and guided by the top coders in the SFDC community, each project here represents a step forward in mastering this powerful framework."
