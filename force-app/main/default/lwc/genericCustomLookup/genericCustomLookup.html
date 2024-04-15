@@ -1,0 +1,50 @@
+<template>
+    <div class="slds-box slds-theme_default">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <div class="slds-combobox_container">
+                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                            role="none">
+                            <lightning-input type="search" label={label} placeholder={placeholder}
+                                onchange={changeHandler}></lightning-input>
+                        </div>
+                        <template lwc:if={hasRecords}>
+                            <div id="listbox-id-3"
+                                class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                                role="listbox" tabindex="0" aria-busy="false">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template lwc:if={sobjectList}>
+                                        <template for:each={sobjectList} for:item="record">
+                                            <li key={record.Id} onclick={clickHandler} role="presentation"
+                                                class="slds-listbox__item">
+                                                <div data-recid={record.Id} aria-selected="true" id="option25"
+                                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta slds-has-focus"
+                                                    role="option" tabindex="0">
+                                                    <lightning-icon data-recid={record.Id} icon-name="standard:account"
+                                                        alternative-text={record.Name}
+                                                        title={record.Name}></lightning-icon>
+                                                    <span class="slds-media__body">
+                                                        <span data-recid={record.Id}
+                                                            class="slds-listbox__option-text slds-listbox__option-text_entity">{record.Name}</span>
+                                                        <span data-recid={record.Id}
+                                                            class="slds-listbox__option-meta slds-listbox__option-meta_entity">{record.BillingCity}</span>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+                        <template lwc:if={selectedrecords}>
+                            <lightning-pill-container items={selectedrecords}
+                                onitemremove={handleItemRemove}></lightning-pill-container>
+                        </template>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
